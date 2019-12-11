@@ -3,41 +3,40 @@ import java.awt.event.*;
 
 public class LoginFrame extends Frame implements ActionListener, WindowListener {
 
-    private Frame loginFrame;
-    private TextField usernameTextField;
-    private TextField passwordTextField;
-    private Label label;
-    private Button loginBtn;
+    private static TextField usernameTextField;
+    private static TextField passwordTextField;
+    private static Label topLabel, usernameLabel, passwordLabel;
+    private static Button loginBtn;
 
     public LoginFrame() {
         setTitle("Login");
 
-        label = new Label("Login to your instegram user");
-        label.setBounds(50, 150, 300, 30);
-        label.setLocation(30, 40);
-        add(label);
+        topLabel = new Label("Login to your instegram user");
+        topLabel.setBounds(50, 150, 300, 30);
+        topLabel.setLocation(30, 40);
+        add(topLabel);
 
-        label = new Label("Username:");
-        label.setBounds(20, 150, 70, 20);
-        label.setLocation(30, 70);
-        add(label);
+        usernameLabel = new Label("Username:");
+        usernameLabel.setBounds(20, 150, 70, 20);
+        usernameLabel.setLocation(30, 70);
+        add(usernameLabel);
 
         usernameTextField = new TextField();
         usernameTextField.setBounds(60, 50, 170, 20);
         usernameTextField.setLocation(30, 90);
         add(usernameTextField);
 
-        label = new Label("Password:");
-        label.setBounds(20, 150, 70, 20);
-        label.setLocation(30, 130);
-        add(label);
+        passwordLabel = new Label("Password:");
+        passwordLabel.setBounds(20, 150, 70, 20);
+        passwordLabel.setLocation(30, 130);
+        add(passwordLabel);
 
         passwordTextField = new TextField();
         passwordTextField.setBounds(60, 50, 170, 20);
         passwordTextField.setLocation(30, 150);
         add(passwordTextField);
 
-        Button loginBtn = new Button("LOGIN");
+        loginBtn = new Button("LOGIN");
         loginBtn.setBounds(100, 120, 80, 30);
         loginBtn.setLocation(30, 180);
         loginBtn.addActionListener(this);
@@ -45,46 +44,54 @@ public class LoginFrame extends Frame implements ActionListener, WindowListener 
 
         setResizable(false);
         addWindowListener(this);
-        setSize(300,300);
+        setSize(300, 300);
         setLayout(null);
         setVisible(true);
     }
 
     public void actionPerformed(ActionEvent e) {
+        usernameLabel.setVisible(false);
+        usernameTextField.setVisible(false);
+        passwordLabel.setVisible(false);
+        passwordTextField.setVisible(false);
+        loginBtn.setVisible(false);
+        topLabel.setText("Working...");
         new Login(usernameTextField.getText(), passwordTextField.getText());
     }
 
-    @Override
+    public static void loginFailed() {
+        usernameLabel.setVisible(true);
+        usernameTextField.setVisible(true);
+        passwordLabel.setVisible(true);
+        passwordTextField.setVisible(true);
+        loginBtn.setVisible(true);
+        topLabel.setText("Failed pleas try again");
+    }
+
     public void windowOpened(WindowEvent e) {
 
     }
 
-    @Override
     public void windowClosing(WindowEvent e) {
         Main.closeFrame();
     }
 
-    @Override
     public void windowClosed(WindowEvent e) {
 
     }
 
-    @Override
     public void windowIconified(WindowEvent e) {
 
     }
 
-    @Override
     public void windowDeiconified(WindowEvent e) {
 
     }
 
-    @Override
     public void windowActivated(WindowEvent e) {
 
     }
 
-    @Override
     public void windowDeactivated(WindowEvent e) {
 
     }
